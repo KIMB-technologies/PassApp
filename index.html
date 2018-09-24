@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- <html lang="en"> -->
 <html lang="en" manifest="appcache.manifest">
 	<head>
 		<meta charset="utf-8">
@@ -86,8 +87,9 @@
 				
 				<div class="output box">
 					<p class="copy">
-						<button id="copyButton" title="Copy password to clipboard.">Copy</button>
 						<button id="clearButton" title="Clear all password data.">Clear</button>
+						<button id="copyButton" title="Copy password to clipboard.">Copy</button>
+						<span id="copiedTextMessage" class="hidden smallnotice"></span>
 					</p>
 					<p class="outputtexts">
 						<input type="password" autocomplete="off" readonly="readonly" id="resultHidden" class="fullsize">
@@ -108,7 +110,7 @@
 		</div>
 
 		<div id="hintsOverlay" class="hidden">
-			<div class="overlay">
+			<div class="overlay" id="hintsBackground">
 			</div>
 			<div class="overlaycontent">
 				<h1>PassApp</h1>

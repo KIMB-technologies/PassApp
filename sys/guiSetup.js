@@ -21,19 +21,47 @@ function guiSetup(){
 	const selectDestChooser = "select#destChooser";
 	const inputOtherDest = "input#secondPart";
 	const clearButton = "button#clearButton";
+	const copiedMessage = "span#copiedTextMessage";
 
 	/**
 	 * init, put to clipboard
 	 */
 	function loadClipboard(){
+		var timeout;
+		function message( text ){
+			$( copiedMessage ).text( text );
+			$( copiedMessage ).removeClass("hidden");			
+
+			if( timeout != null ){
+				clearTimeout( timeout );
+			}
+			timeout = setTimeout( () => {
+				$( copiedMessage ).addClass("hidden");
+			}, 5000);
+		}
+
 		if( clipboard != null ) {
 			clipboard.destroy();
 		}
-		clipboard = new Clipboard(clipboardButton, {
-			text: function (trigger) {
-				return $( hashInputElement ).val() == "" ? " " : $( hashInputElement ).val();
-			}
-		});
+		if( !ClipboardJS.isSupported() ){
+			$( clipboardButton ).addClass("hidden");
+		}
+		else{
+			clipboard = new ClipboardJS(clipboardButton, {
+				text: function ( trigger ) {
+					return $( hashInputElement ).val() == "" ? " " : $( hashInputElement ).val();
+				}
+			});
+			clipboard.on('success', function(e) {
+				if( e.text != " " ){
+					message("Copied!");
+				}
+				e.clearSelection();
+			});
+			clipboard.on('error', function(e) {
+				message("Unable to copy, please use Ctrl+C!");
+			});
+		}
 	}
 	loadClipboard();
 

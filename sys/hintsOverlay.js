@@ -8,13 +8,27 @@ function hintsOverlay(){
 	const openHintsButton = "button#openHints";
 	const closeHintsButton = "button#closeHints"
 	const hintsOverlayDiv = "div#hintsOverlay";
+	const hintsOverlayBackg = "div#hintsBackground";
+
+	var opened = false;
+
+	function closeit(){
+		opened = false;
+		$( hintsOverlayDiv ).addClass( "hidden" );
+	}
+	function openit(){
+		opened = true;
+		$( hintsOverlayDiv ).removeClass( "hidden" );
+	}
 
 	function openCloseInit(){
-		$( openHintsButton ).click( function (){
-			$( hintsOverlayDiv ).removeClass( "hidden" );
-		});
-		$( closeHintsButton ).click( function (){
-			$( hintsOverlayDiv ).addClass( "hidden" );
+		$( openHintsButton ).click( openit );
+		$( closeHintsButton ).click( closeit );
+		$( hintsOverlayBackg ).click( closeit );
+		$(document).keyup(function(e) {
+			if(e.keyCode == 27 && opened) { // on ESC
+				closeit();
+			}
 		});
 	}
 	openCloseInit();

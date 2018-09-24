@@ -116,7 +116,7 @@ div.footer a, div.footer a:hover, div.footer a:active, div.footer a:visited{
 	z-index: 11;
 	position: absolute;
 	top: 10px;
-	left: calc( 50% - 200px );
+	left: calc( 50% - 200px - 10px );
 	background-color: white;
 	width: 400px;
 	padding: 10px;
