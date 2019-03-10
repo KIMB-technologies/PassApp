@@ -50,7 +50,7 @@ class PassGen{
 	hash(){
 		var tmp = this.input;
 		for(var i = 0; i < 1000; i++){
-			tmp = this.hashSHA( tmp );
+			tmp = this.hashSHA( tmp + this.input );
 		}
 		this.output = this.hashRMD( tmp );
 	}
